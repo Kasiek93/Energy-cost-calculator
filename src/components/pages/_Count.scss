@@ -1,0 +1,30 @@
+@import "../../variables";
+
+
+ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+
+  li {
+    padding: 40px;
+
+    a {
+      color: $panel-color;
+      font-family: $font-links;
+      text-decoration:none;
+
+
+      &:hover {
+        color: $color-active;
+
+
+        &:active {
+          color: $color-home;
+        }
+
+      }
+    }
+  }
+}

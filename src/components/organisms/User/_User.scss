@@ -1,0 +1,44 @@
+@import "../../../variables";
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+
+  input[type] {
+    border: 4px solid $panel-color;
+    border-radius: 5px;
+    background-color: $main-color;
+
+  }
+}
+  p{
+    font-family: $font-description;
+    color: $color-description;
+    font-size:25px;
+
+}
+
+
+button {
+
+  padding:10px 10px;
+  margin-top: 10px;
+  background-color: $color-button;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-box-shadow: 0 8px 0 $color-shadow;
+  -moz-box-shadow: 0 8px 0 $color-shadow;
+  box-shadow: 0 8px 0 $color-shadow;
+  font-family: $font-description;
+
+
+
+  &:hover{
+    color:$color-active;
+  }
+
+}
