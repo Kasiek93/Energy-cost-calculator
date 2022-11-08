@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
        <nav>
            <div className="logo">
-               <h1> Kalkulator rachunków </h1>
+               <h1> Kalkulator rachunków 2</h1>
            </div>
            <div className='navItem'>
            <NavLink to='/'>Home</NavLink>
