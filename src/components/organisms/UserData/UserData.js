@@ -8,12 +8,12 @@ const UserData = () => {
         localStorage.setItem("email","")
         localStorage.setItem("password","")}
     return (
-        <div>
-            <form>
+
+            <form className="form">
                 <button onClick={resetUser}>Usuń użytkownika</button>
             </form>
 
-        </div>
+
     );
 };
 
