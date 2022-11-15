@@ -11,6 +11,7 @@ export default function List() {
         <div
             className="list__wrapper"
             style={{
+
                 textAlign: "center",
                 display: "flex",
                 justifyContent: "space-around",
