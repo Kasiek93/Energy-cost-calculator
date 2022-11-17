@@ -18,7 +18,7 @@ export default function List() {
                 flexWrap: "wrap",
             }}
         >
-            <div class="elec_wrapper">
+            <div className="elec_wrapper">
                 <button onClick={() => setDropdownElec(!dropdownElec)}>
                     Policz rachunek za prąd
                 </button>

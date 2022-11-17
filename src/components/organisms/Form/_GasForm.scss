@@ -1,0 +1,56 @@
+@import "../../../variables";
+
+
+.form_gas {
+
+  background-color: $color-background;
+}
+.form_1_device {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+
+
+
+
+
+}
+.form_group_1 {
+  width: 150px;
+}
+
+
+
+
+.form_group_power_1{
+  width:100px;
+
+}
+.form_group_hours_1{
+  width:300px;
+}
+.form_group_days_1{
+  width:200px;
+}
+
+.form_2_device {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.form_group_2    {
+  width:150px;
+}
+.form_group_power_2{
+  width:100px;
+}
+.form_group_hours_2{
+  width:300px;
+}
+.form_group_days_2{
+  width:200px;
+}
+
