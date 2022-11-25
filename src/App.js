@@ -7,7 +7,7 @@ import './components/pages/_Home.scss';
 import UserSignUp from "./components/organisms/User/User";
 import UserData from "./components/organisms/UserData/UserData";
 import Footer from "./components/organisms/Footer/Footer";
-import GasForm from "./components/organisms/Form/GasForm";
+import Electricity from "./components/organisms/Form/Electricity";
 
 
 
@@ -20,9 +20,9 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
-                <Route path="/policz" element={<><List/><GasForm/></>}/>
+                <Route path="/policz" element={<List></List>}/>
                 <Route path="/rejestracja_uzytkownika" element={<><UserSignUp/><UserData/></>}/>
-
+                <Route path="/Electricity" element={<Electricity></Electricity>}/>
 
             </Routes>
             <Footer></Footer>

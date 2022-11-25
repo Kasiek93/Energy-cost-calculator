@@ -12,9 +12,11 @@ const Navbar = () => {
            <div className='navItem'>
            <NavLink to='/'>Home</NavLink>
            <NavLink to='/policz'>Policz</NavLink>
+
                {localStorage.getItem("name")
                    ? <NavLink to='/rejestracja_uzytkownika'>{localStorage.getItem("name")}</NavLink>
                    : <NavLink to='/rejestracja_uzytkownika'>Rejestracja&nbsp;użytkownika</NavLink>
+
                }
            </div>
        </nav>
