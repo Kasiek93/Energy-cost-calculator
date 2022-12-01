@@ -138,7 +138,7 @@ const NewItem = () => {
                                 <td>{equipment.power}</td>
                                 <td>{equipment.hours}</td>
                                 <td>{equipment.days}</td>
-                                <td>{equipment.result}</td>
+                                <td>{equipment.score}</td>
                             </tr>))}
 
                         </tbody>
