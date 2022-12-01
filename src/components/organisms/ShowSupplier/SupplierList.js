@@ -17,6 +17,7 @@ export const gasDropdown = [
         id:3,
         title:"PGNiG",
         path: "./pgnig",
+        number:4,
         cName:"navgas-item",
     },
 
@@ -50,8 +51,8 @@ export const elektricityDropdown = [
     },
     {
         id:3,
-        title:"PGNiG",
-        path: "./pgnig",
+        title:"E.ON",
+        path: "./eon",
         cName:"navel-item",
     },
 

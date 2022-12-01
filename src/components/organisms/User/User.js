@@ -1,30 +1,19 @@
 import React from "react";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import './_User.scss';
 
 export default function UserSignUp() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const user = {nameUser: name, emailUser: email, passwordUser: password}
-
-    useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(user))
-    }, [name])
-
-    useEffect(() => {
-        localStorage.setItem("email", email)
-    }, [email])
-
-    useEffect(() => {
-        localStorage.setItem("password", password)
-    }, [password])
+    const [name, setName] = useState(
+        localStorage.getItem("name"));
+    const [email, setEmail] = useState(
+        localStorage.getItem("email"));
+    const [password, setPassword] = useState(
+        localStorage.getItem("password"));
 
 
     const submitHandler = (e) => {
 
-        // e.preventDefault()
+        e.preventDefault()
         localStorage.setItem("name", name)
         localStorage.setItem("email", email)
         localStorage.setItem("password", password)

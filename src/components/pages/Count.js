@@ -29,7 +29,7 @@ export default function List() {
                     <ul className="navel-item">
                         {elektricityDropdown.map((item) => {
                             return <li key={item.id}>
-                                <Link to='/Electricity'>{item.title}</Link>
+                                <Link to={"/Electricity/"+item.title}>{item.title}</Link>
 
                             </li>
 

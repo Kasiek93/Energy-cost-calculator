@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import View from "./View";
 import "./_Electricity.scss";
+import {useParams} from "react-router-dom";
 
 const getData = () => {
     const data = window.localStorage.getItem('equipments');
@@ -14,17 +14,35 @@ const getData = () => {
 
 
 const NewItemForm = () => {
+    const params = useParams();
+    var converter
+    switch (params.company) {
+        case 'Tauron':
+            converter = 0.73;
+            break;
+        case 'Energa':
+            converter = 0.80;
+            break;
+        case 'E.ON':
+            converter = 0.80;
+            break;
+        case 'PGE':
+            converter = 0.78;
+            break;
+        case 'Enea':
+            converter = 0.73;
+            break;
+    }
 
-
+    const [result,setResult] =useState();
     const [equipments, setEquipments] = useState(getData());
-
     const [device, setDevice] = useState('');
     const [power, setPower] = useState('');
     const [hours, setHours] = useState('');
     const [days, setDays] = useState('');
-    const [selects, setSelects] = useState('');
+    const [info,setInfo] = useState([]);
 
-    const handleAddEquipmentSubmit = (e) => {
+    const handleAddSubmit = (e) => {
         e.preventDefault();
 
 
@@ -33,35 +51,44 @@ const NewItemForm = () => {
         setPower('');
         setHours('');
         setDays('');
+        setResult('');
     }
     useEffect(() => {
         localStorage.setItem('equipments', JSON.stringify(equipments));
     }, [equipments])
-    console.log({device, power, hours, days});
-    console.log(device);
+    console.log({device, power, hours, days,result});
     return (
 
         <div className='wraper'>
             <h1>Przelicznik prądu</h1>
             <div className='form-container'>
                 <form autoComplete="off" className='form-group'
-                      onSubmit={() => {
-                          handleAddEquipmentSubmit()
-                      }}>
+                      onSubmit={(e)=>
+                      {e.preventDefault();setResult(power*days*hours*converter);
+
+                          setInfo(tab =>[...tab,{
+                              device:device,
+                              power:power,
+                              hours:hours,
+                              days:days,
+                              result:result,
+                          }])
+                          }}
+
+                >
+
 
                     <label>Urządzenie</label>
-
-
                     <div className="custom-select">
-                        <select className="selectInput" value={selects} onChange={e => setSelects(e.target.value)}>
-                            <option value="1">Lodówka</option>
-                            <option value="2">Telewizor</option>
-                            <option value="3">Pralka</option>
-                            <option value="4">Mikrofalówka</option>
-                            <option value="5">Komputer</option>
-                            <option value="6">Zmywarka</option>
-                            <option value="7">Odkurzacz</option>
-                            <option value="8">Kuchenka Elektryczna</option>
+                        <select className="selectInput" value={device} onChange={e => setDevice(e.target.value)}>
+                            <option value="Lodówka">Lodówka</option>
+                            <option value="Telewizor">Telewizor</option>
+                            <option value="Pralka">Pralka</option>
+                            <option value="Mikrofalówka">Mikrofalówka</option>
+                            <option value="Komputer">Komputer</option>
+                            <option value="Zmywarka">Zmywarka</option>
+                            <option value="Odkurzacz">Odkurzacz</option>
+                            <option value="Kuchenka Elektryczna">Kuchenka Elektryczna</option>
                         </select>
 
                     </div>
@@ -70,7 +97,6 @@ const NewItemForm = () => {
                     <label>Moc</label>
                     <input type="text" className='form-control' required
                            onChange={(e) => setPower(e.target.value)} value={power}/>
-
                     <br/>
                     <label>Ilość godzin/dzień</label>
                     <input type="text" className='form-control' required
@@ -87,6 +113,7 @@ const NewItemForm = () => {
             </div>
 
 
+
             <div className='view-container'>
 
                 <div className='table-responsive'>
@@ -94,30 +121,28 @@ const NewItemForm = () => {
                         <thead>
                         <tr>
                             <th>Urządzenie</th>
-
-
                             <th>Moc</th>
-
-
                             <th>Godziny</th>
-
-
                             <th>Dni</th>
-
-
+                            <th>Zużycie</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        {/*<View equipments={equipments}/>*/}
-                            <View/>
+
+                        {info.map(equipment => (
+                        <tr key={equipment.device}>
+                            <td>{equipment.device}</td>
+                            <td>{equipment.power}</td>
+                            <td>{equipment.hours}</td>
+                            <td>{equipment.days}</td>
+                            <td>{equipment.result}</td>
+                        </tr>))}
 
                             </tbody>
                             </table>
                             </div>
 
-
-                        {/*{equipments.length < 1 && <div> brak urzadzeń</div>}*/}
 
                 </div>
 
@@ -125,10 +150,7 @@ const NewItemForm = () => {
 
                     );
 
-
                     }
-
-
                     export default NewItemForm;
 
 

@@ -26,7 +26,7 @@ function App() {
                     <Route path="/policz" element={<List></List>}/>
                     <Route path="/rejestracja_uzytkownika" element={<><UserSignUp/><UserData/></>}/>
                     <Route path="/Electricity" element={<Electricity></Electricity>}/>
-
+                    <Route path="/Electricity/:company" element={<Electricity></Electricity>}/>
                 </Routes>
                 <Footer></Footer>
             </BrowserRouter>
