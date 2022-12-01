@@ -1,9 +1,9 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import "./_Electricity.scss";
+
 import {useParams} from "react-router-dom";
 
-const getData = () => {
+const getDataForm = () => {
     const data = window.localStorage.getItem('equipments');
     if (data) {
         return JSON.parse(data);
@@ -13,29 +13,36 @@ const getData = () => {
 }
 
 
-const NewItemForm = () => {
+const NewItem = () => {
     const params = useParams();
-    var converter
-    switch (params.company) {
-        case 'Tauron':
-            converter = 0.73;
+    var counter
+    var fee
+
+    switch (params.corporation) {
+        case 'EWE':
+            counter = 0.23;
+            fee = 6.27;
             break;
-        case 'Energa':
-            converter = 0.80;
+        case 'Fortum':
+            counter = 0.20;
+            fee = 7.30;
             break;
-        case 'E.ON':
-            converter = 0.80;
+        case 'PGNiG':
+            counter = 0.20;
+            fee = 6.30;
             break;
         case 'PGE':
-            converter = 0.78;
+            counter = 0.24;
+            fee = 6.58;
             break;
-        case 'Enea':
-            converter = 0.73;
+        case 'Tauron':
+            counter = 0.20;
+            fee = 6.30;
             break;
     }
 
-    const [result,setResult] =useState();
-    const [equipments, setEquipments] = useState(getData());
+    const [score,setScore] =useState();
+    const [equipments, setEquipments] = useState(getDataForm());
     const [device, setDevice] = useState('');
     const [power, setPower] = useState('');
     const [hours, setHours] = useState('');
@@ -51,29 +58,29 @@ const NewItemForm = () => {
         setPower('');
         setHours('');
         setDays('');
-        setResult('');
+        setScore('');
     }
     useEffect(() => {
         localStorage.setItem('equipments', JSON.stringify(equipments));
     }, [equipments])
-    console.log({device, power, hours, days,result});
+    console.log({device, power, hours, days,score});
     return (
 
         <div className='wraper'>
-            <h1>Przelicznik prądu</h1>
+            <h1>Przelicznik gazu</h1>
             <div className='form-container'>
                 <form autoComplete="off" className='form-group'
                       onSubmit={(e)=>
-                      {e.preventDefault();setResult(power*days*hours*converter);
+                      {e.preventDefault();setScore(power*days*hours*counter+fee);
 
                           setInfo(tab =>[...tab,{
                               device:device,
                               power:power,
                               hours:hours,
                               days:days,
-                              result:result,
+                              score:score,
                           }])
-                          }}
+                      }}
 
                 >
 
@@ -81,14 +88,9 @@ const NewItemForm = () => {
                     <label>Urządzenie</label>
                     <div className="custom-select">
                         <select className="selectInput" value={device} onChange={e => setDevice(e.target.value)}>
-                            <option value="Lodówka">Lodówka</option>
-                            <option value="Telewizor">Telewizor</option>
-                            <option value="Pralka">Pralka</option>
-                            <option value="Mikrofalówka">Mikrofalówka</option>
-                            <option value="Komputer">Komputer</option>
-                            <option value="Zmywarka">Zmywarka</option>
-                            <option value="Odkurzacz">Odkurzacz</option>
-                            <option value="Kuchenka Elektryczna">Kuchenka Elektryczna</option>
+                            <option value="Kocioł gazowy">Kocioł gazowy</option>
+                            <option value="Kuchenka gazowa">Kuchenka gazowa</option>
+
                         </select>
 
                     </div>
@@ -131,28 +133,24 @@ const NewItemForm = () => {
                         <tbody>
 
                         {info.map(equipment => (
-                        <tr key={equipment.device}>
-                            <td>{equipment.device}</td>
-                            <td>{equipment.power}</td>
-                            <td>{equipment.hours}</td>
-                            <td>{equipment.days}</td>
-                            <td>{equipment.result}</td>
-                        </tr>))}
+                            <tr key={equipment.device}>
+                                <td>{equipment.device}</td>
+                                <td>{equipment.power}</td>
+                                <td>{equipment.hours}</td>
+                                <td>{equipment.days}</td>
+                                <td>{equipment.result}</td>
+                            </tr>))}
 
-                            </tbody>
-                            </table>
-                            </div>
-
-
+                        </tbody>
+                    </table>
                 </div>
 
-                </div>
 
-                    );
+            </div>
 
-                    }
-                    export default NewItemForm;
+        </div>
 
+    );
 
-
-
+}
+export default NewItem;

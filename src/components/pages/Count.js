@@ -33,14 +33,9 @@ export default function List() {
 
                             </li>
 
-
-
                         })}
                     </ul>
                 )}
-
-
-
 
 
             </div>
@@ -51,7 +46,10 @@ export default function List() {
                 {dropdownGas && (
                     <ul className="navgas-item">
                         {gasDropdown.map((item) => {
-                            return <li key={item.id}>{item.title}</li>;
+                            return <li key={item.id}>
+                                <Link to={"/Gas/"+item.title}>{item.title}</Link>
+
+                            </li>;
                         })}
                     </ul>
                 )}

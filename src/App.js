@@ -8,6 +8,8 @@ import UserSignUp from "./components/organisms/User/User";
 import UserData from "./components/organisms/UserData/UserData";
 import Footer from "./components/organisms/Footer/Footer";
 import Electricity from "./components/organisms/Form/Electricity";
+import Gas from "./components/organisms/Form/Gas";
+
 
 
 
@@ -27,6 +29,9 @@ function App() {
                     <Route path="/rejestracja_uzytkownika" element={<><UserSignUp/><UserData/></>}/>
                     <Route path="/Electricity" element={<Electricity></Electricity>}/>
                     <Route path="/Electricity/:company" element={<Electricity></Electricity>}/>
+                    <Route path="/Gas" element={<Gas></Gas>}/>
+                    <Route path="/Gas/:corporation" element={<Gas></Gas>}/>
+
                 </Routes>
                 <Footer></Footer>
             </BrowserRouter>
