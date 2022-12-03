@@ -11,6 +11,7 @@ export default function UserSignUp() {
         localStorage.getItem("password"));
 
 
+
     const submitHandler = (e) => {
 
         e.preventDefault()

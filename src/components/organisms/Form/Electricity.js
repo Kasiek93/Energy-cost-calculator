@@ -52,28 +52,32 @@ const NewItemForm = () => {
         setHours('');
         setDays('');
         setResult('');
+
+
+
+        setInfo(tab => [...tab, {
+            device,
+            power,
+            hours,
+            days,
+            result,
+        }])
     }
     useEffect(() => {
         localStorage.setItem('equipments', JSON.stringify(equipments));
     }, [equipments])
     console.log({device, power, hours, days,result});
+
+    useEffect(() => {
+        setResult(power * days * hours * converter);
+    }, [power, days, hours])
     return (
 
         <div className='wraper'>
             <h1>Przelicznik prądu</h1>
             <div className='form-container'>
                 <form autoComplete="off" className='form-group'
-                      onSubmit={(e)=>
-                      {e.preventDefault();setResult(power*days*hours*converter);
-
-                          setInfo(tab =>[...tab,{
-                              device:device,
-                              power:power,
-                              hours:hours,
-                              days:days,
-                              result:result,
-                          }])
-                          }}
+                      onSubmit={handleAddSubmit}
 
                 >
 
