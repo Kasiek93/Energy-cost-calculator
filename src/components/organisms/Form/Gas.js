@@ -59,30 +59,32 @@ const NewItem = () => {
         setHours('');
         setDays('');
         setScore('');
+
+        setInfo(tab =>[...tab,{
+            device,
+            power,
+            hours,
+            days,
+            score,
+        }])
     }
     useEffect(() => {
         localStorage.setItem('equipments', JSON.stringify(equipments));
     }, [equipments])
     console.log({device, power, hours, days,score});
+
+    useEffect(() => {
+        setScore((power * days * hours * counter)+fee);
+    }, [power, days, hours])
     return (
 
         <div className='wraper'>
             <h1>Przelicznik gazu</h1>
             <div className='form-container'>
                 <form autoComplete="off" className='form-group'
-                      onSubmit={(e)=>
-                      {e.preventDefault();setScore(power*days*hours*counter+fee);
+                      onSubmit={handleAddSubmit}
+                      >
 
-                          setInfo(tab =>[...tab,{
-                              device:device,
-                              power:power,
-                              hours:hours,
-                              days:days,
-                              score:score,
-                          }])
-                      }}
-
-                >
 
 
                     <label>Urządzenie</label>
