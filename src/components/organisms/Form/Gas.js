@@ -1,10 +1,12 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import "./_Form.scss";
+import "./_Table.scss";
 
 import {useParams} from "react-router-dom";
 
-const getDataForm = () => {
-    const data = window.localStorage.getItem('equipments');
+const getDataForm = (key) => {
+    const data = window.localStorage.getItem(key);
     if (data) {
         return JSON.parse(data);
     } else {
@@ -40,25 +42,22 @@ const NewItem = () => {
             fee = 6.30;
             break;
     }
-
-    const [score,setScore] =useState();
-    const [equipments, setEquipments] = useState(getDataForm());
-    const [device, setDevice] = useState('');
+    const [total,setTotal]= useState(getDataForm("total"));
+    const [score,setScore] =useState(0);
+    const [equipments, setEquipments] = useState(getDataForm("equipments"));
+    const [device, setDevice] = useState('Kocioł gazowy');
     const [power, setPower] = useState('');
     const [hours, setHours] = useState('');
     const [days, setDays] = useState('');
-    const [info,setInfo] = useState([]);
+    const [info,setInfo] = useState(getDataForm ([]));
 
     const handleAddSubmit = (e) => {
         e.preventDefault();
 
 
         setEquipments({device, power, hours, days})
-        setDevice('');
-        setPower('');
-        setHours('');
-        setDays('');
-        setScore('');
+        setScore((Number(power) * Number(days)* Number(hours) * counter)+fee);
+        setTotal(Number(total) + Number(score));
 
         setInfo(tab =>[...tab,{
             device,
@@ -68,14 +67,32 @@ const NewItem = () => {
             score,
         }])
     }
+
+
+    useEffect( () =>{
+            setScore((Number(power) * Number(days)* Number(hours) * counter)+fee);
+        },
+        [power,
+              days,
+              hours,
+
+        ]
+    )
     useEffect(() => {
         localStorage.setItem('equipments', JSON.stringify(equipments));
     }, [equipments])
     console.log({device, power, hours, days,score});
 
     useEffect(() => {
-        setScore((power * days * hours * counter)+fee);
-    }, [power, days, hours])
+        localStorage.setItem('info', JSON.stringify(info));
+    }, [info])
+
+    useEffect(() => {
+        localStorage.setItem('total', JSON.stringify(total));
+    }, [total])
+    console.log({device, power, hours, days,score,total});
+
+
     return (
 
         <div className='wraper'>
@@ -84,8 +101,6 @@ const NewItem = () => {
                 <form autoComplete="off" className='form-group'
                       onSubmit={handleAddSubmit}
                       >
-
-
 
                     <label>Urządzenie</label>
                     <div className="custom-select">
@@ -113,6 +128,9 @@ const NewItem = () => {
                     <button type="submit" className='btn btn-success btn-md'>
                         Dodaj
                     </button>
+                    <button type="submit" className='btn btn-success btn-md'>
+                        Prześlij wyniki
+                    </button>
                 </form>
             </div>
 
@@ -128,7 +146,7 @@ const NewItem = () => {
                             <th>Moc</th>
                             <th>Godziny</th>
                             <th>Dni</th>
-                            <th>Zużycie</th>
+                            <th>Zużycie[zł]</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -142,17 +160,15 @@ const NewItem = () => {
                                 <td>{equipment.days}</td>
                                 <td>{equipment.score}</td>
                             </tr>))}
-
+                        <th>Ogólne zużycie[zł]</th>
                         </tbody>
+                        <tr>
+                            <td>{total}</td>
+                        </tr>
                     </table>
                 </div>
-
-
             </div>
-
         </div>
-
     );
-
 }
 export default NewItem;

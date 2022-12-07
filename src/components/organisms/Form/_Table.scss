@@ -1,0 +1,30 @@
+@import "../../../variables";
+
+.view-container {
+  margin-top:10px;
+}
+
+.table {
+  background-color: $main-color;
+  font-family: $font-navbar;
+  border: 4px solid $color-active;
+
+  thead {
+    background-color: $color-picture;
+
+    th {
+      border:2px solid $color-description;
+      padding: 2px 2px;
+
+    }
+  }
+}
+
+tbody {
+  box-shadow: 0 0 20px 10px $color-picture;
+
+  tr {
+    text-decoration: underline;
+
+  }
+}

@@ -11,17 +11,12 @@ import Electricity from "./components/organisms/Form/Electricity";
 import Gas from "./components/organisms/Form/Gas";
 
 
-
-
-
-
 function App() {
 
     return (
 
             <BrowserRouter>
                 <Navbar></Navbar>
-
 
                 <Routes>
                     <Route path="/" element={<Home></Home>}></Route>
@@ -35,8 +30,6 @@ function App() {
                 </Routes>
                 <Footer></Footer>
             </BrowserRouter>
-
-
 
     );
 }

@@ -14,7 +14,8 @@ export default function UserSignUp() {
 
     const submitHandler = (e) => {
 
-        e.preventDefault()
+      //  e.preventDefault()
+
         localStorage.setItem("name", name)
         localStorage.setItem("email", email)
         localStorage.setItem("password", password)
@@ -32,12 +33,7 @@ export default function UserSignUp() {
             <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
 
             <button onClick={submitHandler}>Zapisz</button>
-            <div>
 
-                <div>{localStorage.getItem("name")}</div>
-                <div>{localStorage.getItem("email")}</div>
-                <div>{localStorage.getItem("password")}</div>
-            </div>
         </form>
 
     )

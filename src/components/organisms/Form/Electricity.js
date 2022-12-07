@@ -1,10 +1,11 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import "./_Electricity.scss";
+import "./_Form.scss";
 import {useParams} from "react-router-dom";
+import "./_Table.scss";
 
-const getData = () => {
-    const data = window.localStorage.getItem('equipments');
+const getData = (key) => {
+    const data = window.localStorage.getItem(key);
     if (data) {
         return JSON.parse(data);
     } else {
@@ -33,25 +34,23 @@ const NewItemForm = () => {
             converter = 0.73;
             break;
     }
-
-    const [result,setResult] =useState();
-    const [equipments, setEquipments] = useState(getData());
-    const [device, setDevice] = useState('');
+    const [overall,setOverall]= useState(getData("overall"));
+    const [result,setResult] =useState(0);
+    const [equipments, setEquipments] = useState(getData("equipments"));
+    const [device, setDevice] = useState('Lodówka');
     const [power, setPower] = useState('');
     const [hours, setHours] = useState('');
     const [days, setDays] = useState('');
-    const [info,setInfo] = useState([]);
+    const [info,setInfo] = useState(getData([]));
+
 
     const handleAddSubmit = (e) => {
         e.preventDefault();
 
 
         setEquipments({device, power, hours, days})
-        setDevice('');
-        setPower('');
-        setHours('');
-        setDays('');
-        setResult('');
+        setResult(Number(power) * Number(days)* Number(hours) * converter);
+        setOverall(Number(overall) + Number(result));
 
 
 
@@ -61,16 +60,37 @@ const NewItemForm = () => {
             hours,
             days,
             result,
+
         }])
     }
+
+    useEffect( () =>{
+            setResult(Number(power) * Number(days)* Number(hours) * converter);
+        },
+        [power,
+            days,
+            hours]
+
+    )
     useEffect(() => {
         localStorage.setItem('equipments', JSON.stringify(equipments));
     }, [equipments])
-    console.log({device, power, hours, days,result});
 
     useEffect(() => {
-        setResult(power * days * hours * converter);
-    }, [power, days, hours])
+        localStorage.setItem('info', JSON.stringify(info));
+    }, [info])
+
+    useEffect(() => {
+        localStorage.setItem('overall', JSON.stringify(overall));
+    }, [overall])
+    console.log({device, power, hours, days,result,overall});
+ //  localStorage.clear();
+
+
+
+
+
+
     return (
 
         <div className='wraper'>
@@ -84,7 +104,7 @@ const NewItemForm = () => {
 
                     <label>Urządzenie</label>
                     <div className="custom-select">
-                        <select className="selectInput" value={device} onChange={e => setDevice(e.target.value)}>
+                        <select  className="selectInput" value={device} onChange={e => setDevice(e.target.value)}>
                             <option value="Lodówka">Lodówka</option>
                             <option value="Telewizor">Telewizor</option>
                             <option value="Pralka">Pralka</option>
@@ -113,6 +133,9 @@ const NewItemForm = () => {
                     <button type="submit" className='btn btn-success btn-md'>
                         Dodaj
                     </button>
+                    <button type="submit" className='btn btn-success btn-md'>
+                        Prześlij wyniki
+                    </button>
                 </form>
             </div>
 
@@ -128,9 +151,10 @@ const NewItemForm = () => {
                             <th>Moc</th>
                             <th>Godziny</th>
                             <th>Dni</th>
-                            <th>Zużycie</th>
-                            <th></th>
+                            <th>Zużycie[zł]</th>
+
                         </tr>
+
                         </thead>
                         <tbody>
 
@@ -143,19 +167,18 @@ const NewItemForm = () => {
                             <td>{equipment.result}</td>
                         </tr>))}
 
-                            </tbody>
+                        <th>Ogólne zużycie[zł]</th>
+                        </tbody>
+                           <tr>
+                               <td>{overall}</td>
+                            </tr>
                             </table>
-                            </div>
-
-
                 </div>
-
-                </div>
-
-                    );
-
-                    }
-                    export default NewItemForm;
+            </div>
+        </div>
+    );
+}
+export default NewItemForm;
 
 
 
