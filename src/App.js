@@ -9,7 +9,7 @@ import UserData from "./components/organisms/UserData/UserData";
 import Footer from "./components/organisms/Footer/Footer";
 import Electricity from "./components/organisms/Form/Electricity";
 import Gas from "./components/organisms/Form/Gas";
-
+import Contact from "./components/pages/Contact";
 
 function App() {
 
@@ -26,6 +26,8 @@ function App() {
                     <Route path="/Electricity/:company" element={<Electricity></Electricity>}/>
                     <Route path="/Gas" element={<Gas></Gas>}/>
                     <Route path="/Gas/:corporation" element={<Gas></Gas>}/>
+                    <Route path="/Contact" element={<Contact></Contact>}/>
+
 
                 </Routes>
                 <Footer></Footer>

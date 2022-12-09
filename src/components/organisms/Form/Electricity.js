@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import "./_Form.scss";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import "./_Table.scss";
 
 const getData = (key) => {
@@ -41,7 +41,7 @@ const NewItemForm = () => {
     const [power, setPower] = useState('');
     const [hours, setHours] = useState('');
     const [days, setDays] = useState('');
-    const [info,setInfo] = useState(getData([]));
+    const [info,setInfo] = useState(getData("info")?getData("info"):[]);
 
 
     const handleAddSubmit = (e) => {
@@ -84,24 +84,14 @@ const NewItemForm = () => {
         localStorage.setItem('overall', JSON.stringify(overall));
     }, [overall])
     console.log({device, power, hours, days,result,overall});
- //  localStorage.clear();
-
-
-
-
-
 
     return (
-
         <div className='wraper'>
             <h1>Przelicznik prądu</h1>
             <div className='form-container'>
                 <form autoComplete="off" className='form-group'
                       onSubmit={handleAddSubmit}
-
                 >
-
-
                     <label>Urządzenie</label>
                     <div className="custom-select">
                         <select  className="selectInput" value={device} onChange={e => setDevice(e.target.value)}>
@@ -133,12 +123,23 @@ const NewItemForm = () => {
                     <button type="submit" className='btn btn-success btn-md'>
                         Dodaj
                     </button>
-                    <button type="submit" className='btn btn-success btn-md'>
-                        Prześlij wyniki
-                    </button>
-                </form>
-            </div>
 
+                </form>
+                <button type ="reset" onClick={() => {
+                    setOverall("")
+                    localStorage.removeItem("overall")
+                    info.length=0
+                    localStorage.removeItem("info")
+                }} className='btn btn-success btn-md'>
+                    Usuń dane
+                </button>
+                <Link to={"/Contact/"} onClick={() => {
+                }} >
+                    <button type ="button" className='btn btn-success btn-md'>
+                        Prześlij dane
+                    </button>
+                </Link>
+            </div>
 
 
             <div className='view-container'>
@@ -154,7 +155,6 @@ const NewItemForm = () => {
                             <th>Zużycie[zł]</th>
 
                         </tr>
-
                         </thead>
                         <tbody>
 

@@ -3,9 +3,9 @@ import {useState, useEffect} from 'react';
 import "./_Form.scss";
 import "./_Table.scss";
 
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
-const getDataForm = (key) => {
+const getData = (key) => {
     const data = window.localStorage.getItem(key);
     if (data) {
         return JSON.parse(data);
@@ -42,14 +42,14 @@ const NewItem = () => {
             fee = 6.30;
             break;
     }
-    const [total,setTotal]= useState(getDataForm("total"));
+    const [total,setTotal]= useState(getData("total"));
     const [score,setScore] =useState(0);
-    const [equipments, setEquipments] = useState(getDataForm("equipments"));
+    const [equipments, setEquipments] = useState(getData("equipments"));
     const [device, setDevice] = useState('Kocioł gazowy');
     const [power, setPower] = useState('');
     const [hours, setHours] = useState('');
     const [days, setDays] = useState('');
-    const [info,setInfo] = useState(getDataForm ([]));
+    const [reference,setReference] = useState(getData("reference")?getData("reference"):[]);
 
     const handleAddSubmit = (e) => {
         e.preventDefault();
@@ -59,7 +59,7 @@ const NewItem = () => {
         setScore((Number(power) * Number(days)* Number(hours) * counter)+fee);
         setTotal(Number(total) + Number(score));
 
-        setInfo(tab =>[...tab,{
+        setReference(tab =>[...tab,{
             device,
             power,
             hours,
@@ -84,8 +84,8 @@ const NewItem = () => {
     console.log({device, power, hours, days,score});
 
     useEffect(() => {
-        localStorage.setItem('info', JSON.stringify(info));
-    }, [info])
+        localStorage.setItem('info', JSON.stringify(reference));
+    }, [reference])
 
     useEffect(() => {
         localStorage.setItem('total', JSON.stringify(total));
@@ -94,25 +94,20 @@ const NewItem = () => {
 
 
     return (
-
         <div className='wraper'>
             <h1>Przelicznik gazu</h1>
             <div className='form-container'>
                 <form autoComplete="off" className='form-group'
                       onSubmit={handleAddSubmit}
                       >
-
                     <label>Urządzenie</label>
                     <div className="custom-select">
                         <select className="selectInput" value={device} onChange={e => setDevice(e.target.value)}>
                             <option value="Kocioł gazowy">Kocioł gazowy</option>
                             <option value="Kuchenka gazowa">Kuchenka gazowa</option>
-
                         </select>
-
                     </div>
                     <br/>
-
                     <label>Moc[kWh]</label>
                     <input type="text" className='form-control' required
                            onChange={(e) => setPower(e.target.value)} value={power}/>
@@ -128,16 +123,24 @@ const NewItem = () => {
                     <button type="submit" className='btn btn-success btn-md'>
                         Dodaj
                     </button>
-                    <button type="submit" className='btn btn-success btn-md'>
-                        Prześlij wyniki
-                    </button>
                 </form>
+                <button type ="reset" onClick={() => {
+                    setTotal("")
+                    localStorage.removeItem("total")
+                    reference.length=0
+                    localStorage.removeItem("reference")
+                }} className='btn btn-success btn-md'>
+                    Usuń dane
+                </button>
+                <Link to={"/Contact/"} onClick={() => {
+                }} >
+                    <button type ="button" className='btn btn-success btn-md'>
+                        Prześlij dane
+                    </button>
+                </Link>
             </div>
 
-
-
             <div className='view-container'>
-
                 <div className='table-responsive'>
                     <table className='table'>
                         <thead>
@@ -147,12 +150,11 @@ const NewItem = () => {
                             <th>Godziny</th>
                             <th>Dni</th>
                             <th>Zużycie[zł]</th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        {info.map(equipment => (
+                        {reference.map(equipment => (
                             <tr key={equipment.device}>
                                 <td>{equipment.device}</td>
                                 <td>{equipment.power}</td>
