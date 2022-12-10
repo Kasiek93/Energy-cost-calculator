@@ -35,26 +35,9 @@ npm init react-app my-app
 yarn create react-app my-app
 
 It will create a directory called my-app inside the current folder.
-Inside that directory, it will generate the initial project structure and install the transitive dependencies:
+Inside that directory, it will generate the initial project structure and install the transitive dependencies.
 
-my-app
-├── README.md
-├── node_modules
-├── package.json
-├── .gitignore
-├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-└── src
-├── App.css
-├── App.js
-├── App.test.js
-├── index.css
-├── index.js
-├── logo.svg
-└── serviceWorker.js
-└── setupTests.js
+
 No configuration or complicated folder structures, only the files you need to build your app.
 Once the installation is done, you can open your project folder:
 
