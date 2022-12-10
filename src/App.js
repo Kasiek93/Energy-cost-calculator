@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./components/pages/Home";
 import List from "./components/pages/Count";
-import Navbar from "./components/organisms/Header/Navbar/Navbar";
+import Navbar from "./components/organisms/Navbar/Navbar";
 import './components/pages/_Home.scss';
 import UserSignUp from "./components/organisms/User/User";
 import UserData from "./components/organisms/UserData/UserData";

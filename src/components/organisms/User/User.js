@@ -12,14 +12,11 @@ export default function UserSignUp() {
 
 
 
-    const submitHandler = (e) => {
-
-      //  e.preventDefault()
+    const submitHandler = () => {
 
         localStorage.setItem("name", name)
         localStorage.setItem("email", email)
         localStorage.setItem("password", password)
-
     }
 
 

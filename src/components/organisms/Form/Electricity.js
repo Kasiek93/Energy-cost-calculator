@@ -125,6 +125,7 @@ const NewItemForm = () => {
                     </button>
 
                 </form>
+
                 <button type ="reset" onClick={() => {
                     setOverall("")
                     localStorage.removeItem("overall")
@@ -138,6 +139,8 @@ const NewItemForm = () => {
                     <button type ="button" className='btn btn-success btn-md'>
                         Prześlij dane
                     </button>
+
+
                 </Link>
             </div>
 

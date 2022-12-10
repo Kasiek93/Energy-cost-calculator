@@ -1,5 +1,6 @@
 import React, { useRef,useState } from 'react';
 import emailjs from '@emailjs/browser';
+import "./_Contact.scss";
 
 const getData = (key) => {
     const data = window.localStorage.getItem(key);
@@ -11,15 +12,10 @@ const getData = (key) => {
 }
 const Contact = () => {
     const form = useRef();
-
     const [info,setInfo] = useState(getData("info"));
     const [reference,setReference] = useState(getData("reference"));
     const [overall,setOverall]= useState(getData("overall"));
     const [total,setTotal]= useState(getData("total"));
-
-
-
-
 
 
     const sendEmail = (e) => {
@@ -44,9 +40,9 @@ return (
 
     <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
-        <input type="text" name="user_name" />
+        <input type="text" name="user_name" placeholder="Wpisz imię" />
         <label>Email</label>
-        <input type="email" name="user_email" />
+        <input type="email" name="user_email" placeholder="Wpisz email" />
         <label>Wiadomość</label>
         <textarea name="change" value={JSON.stringify(info)+JSON.stringify(overall)+JSON.stringify(reference)+JSON.stringify(total)}>
         </textarea>

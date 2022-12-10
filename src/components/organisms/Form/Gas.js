@@ -2,7 +2,6 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import "./_Form.scss";
 import "./_Table.scss";
-
 import {Link, useParams} from "react-router-dom";
 
 const getData = (key) => {

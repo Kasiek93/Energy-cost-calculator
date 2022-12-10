@@ -30,9 +30,7 @@ export default function List() {
                         {elektricityDropdown.map((item) => {
                             return <li key={item.id}>
                                 <Link to={"/Electricity/"+item.title}>{item.title}</Link>
-
                             </li>
-
                         })}
                     </ul>
                 )}
@@ -48,7 +46,6 @@ export default function List() {
                         {gasDropdown.map((item) => {
                             return <li key={item.id}>
                                 <Link to={"/Gas/"+item.title}>{item.title}</Link>
-
                             </li>;
                         })}
                     </ul>
