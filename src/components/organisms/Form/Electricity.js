@@ -16,7 +16,7 @@ const getData = (key) => {
 
 const NewItemForm = () => {
     const params = useParams();
-    var converter
+    let converter;
     switch (params.company) {
         case 'Tauron':
             converter = 0.73;
@@ -45,7 +45,7 @@ const NewItemForm = () => {
 
 
     const handleAddSubmit = (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
 
         setEquipments({device, power, hours, days})

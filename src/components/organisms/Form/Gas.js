@@ -16,8 +16,8 @@ const getData = (key) => {
 
 const NewItem = () => {
     const params = useParams();
-    var counter
-    var fee
+    let counter;
+    let fee;
 
     switch (params.corporation) {
         case 'EWE':
