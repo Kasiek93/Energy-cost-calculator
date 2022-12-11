@@ -33,7 +33,11 @@ const NewItemForm = () => {
         case 'Enea':
             converter = 0.73;
             break;
+        default:
+            console.log(`nothing ${params}.`);
     }
+
+
     const [overall,setOverall]= useState(getData("overall"));
     const [result,setResult] =useState(0);
     const [equipments, setEquipments] = useState(getData("equipments"));

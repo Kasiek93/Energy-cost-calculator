@@ -40,7 +40,10 @@ const NewItem = () => {
             counter = 0.20;
             fee = 6.30;
             break;
+        default:
+            console.log(`nothing ${params}.`);
     }
+
     const [total,setTotal]= useState(getData("total"));
     const [score,setScore] =useState(0);
     const [equipments, setEquipments] = useState(getData("equipments"));
