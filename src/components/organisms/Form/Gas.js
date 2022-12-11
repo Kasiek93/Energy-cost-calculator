@@ -74,6 +74,7 @@ const NewItem = () => {
     useEffect( () =>{
             setScore((Number(power) * Number(days)* Number(hours) * counter)+fee);
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [power,
               days,
               hours,

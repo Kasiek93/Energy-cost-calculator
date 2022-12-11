@@ -71,9 +71,10 @@ const NewItemForm = () => {
     useEffect( () =>{
             setResult(Number(power) * Number(days)* Number(hours) * converter);
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [power,
-            days,
-            hours]
+              days,
+              hours]
 
     )
     useEffect(() => {
