@@ -15,11 +15,11 @@ const getData = (key) => {
 
 
 const NewItem = () => {
-    const params = useParams();
+    const {corporation} = useParams()
     let counter;
     let fee;
 
-    switch (params.corporation) {
+    switch (corporation) {
         case 'EWE':
             counter = 0.23;
             fee = 6.27;
@@ -41,7 +41,7 @@ const NewItem = () => {
             fee = 6.30;
             break;
         default:
-            console.log(`nothing ${params}.`);
+            console.log(`nothing ${corporation}.`);
     }
 
     const [total,setTotal]= useState(getData("total"));

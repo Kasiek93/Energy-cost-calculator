@@ -15,9 +15,9 @@ const getData = (key) => {
 
 
 const NewItemForm = () => {
-    const params = useParams();
+    const {company} = useParams()
     let converter;
-    switch (params.company) {
+    switch (company) {
         case 'Tauron':
             converter = 0.73;
             break;
@@ -34,7 +34,7 @@ const NewItemForm = () => {
             converter = 0.73;
             break;
         default:
-            console.log(`nothing ${params}.`);
+            console.log(`nothing ${company}.`);
     }
 
 
